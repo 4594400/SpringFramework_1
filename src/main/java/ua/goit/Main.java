@@ -1,25 +1,23 @@
 package ua.goit;
 
 
-import ua.goit.common.Executor;
-import ua.goit.operation.OperationAdd;
-import ua.goit.operation.OperationDivide;
-import ua.goit.operation.OperationMultiply;
-import ua.goit.operation.OperationSubstract;
+import ua.goit.common.OperationExecutor;
+import ua.goit.common.OperationProvider;
+import ua.goit.operation.OperationSubtract;
 
 public class Main {
     public static void main(String[] args) {
-        Executor executor = new Executor(new OperationAdd());
-        System.out.println(executor.executeStrategy(4, 5));
+        //OperationExecutor executor = new OperationExecutor(new OperationAdd());
+        //System.out.println(executor.executeOperation(4, 5));
 
-        executor = new Executor(new OperationSubstract());
-        System.out.println(executor.executeStrategy(3, 2));
+        OperationExecutor executor = new OperationExecutor(new OperationProvider());
+        System.out.println(executor.executeOperation("33 + 36"));
 
-        executor = new Executor(new OperationMultiply());
-        System.out.println(executor.executeStrategy(2, 8));
+       /* executor = new OperationExecutor(new OperationMultiply());
+        System.out.println(executor.executeOperation(2, 8));
 
-        executor = new Executor(new OperationDivide());
-        System.out.println(executor.executeStrategy(6, 3));
+        executor = new OperationExecutor(new OperationDivide());
+        System.out.println(executor.executeOperation(6, 3));*/
 
     }
 }

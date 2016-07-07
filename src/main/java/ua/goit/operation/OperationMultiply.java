@@ -1,10 +1,11 @@
 package ua.goit.operation;
 
 
-import ua.goit.common.Strategy;
+import ua.goit.common.Operation;
 
-public class OperationMultiply implements Strategy {
-    public int doOperation(int num1, int num2) {
-        return num1 * num2;
+public class OperationMultiply implements Operation {
+    @Override
+    public String doOperation(String expression) {
+        return null;
     }
 }
