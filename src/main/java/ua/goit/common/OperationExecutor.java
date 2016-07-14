@@ -1,41 +1,52 @@
 package ua.goit.common;
 
 
-import ua.goit.operation.OperationAdd;
-import ua.goit.operation.OperationSubtract;
-
-import java.util.List;
+import ua.goit.parser.Parser;
 
 public class OperationExecutor {
-    private List<Operation> operations;
+    private OperationProvider operationProvider;
+    private Parser<Double> parser;
 
-    public OperationExecutor(OperationProvider operationProvider) {
-        this.operations = operationProvider.getOperations();
-    }
 
-    public String executeOperation(String expression) {
-        if(expression.isEmpty()) {
+    public double executeOperation(String expression) {
+        boolean isOperatorFound = false;
+        double result = 0;
+
+        if (expression.isEmpty()) {
             throw new IllegalArgumentException("Incorrect expression! Expression is empty.");
         }
-        for (Operation operation : operations) {
-            String result = operation.doOperation(expression);
-            if (result!=null) {
-                return result;
+
+        parser.parseExpression(expression);
+
+        for (Operation operation : operationProvider.getOperations()) {
+            if (operation.getOperator() != parser.getOperator()) {
+                continue;
             }
+            result = operation.doOperation(parser.getOperands().get(0), parser.getOperands().get(1));
+            isOperatorFound = true;
         }
-
-        throw new IllegalArgumentException("Unsupported operation");
+        if (!isOperatorFound) {
+            throw new IllegalArgumentException("Unsupported operation");
+        }
+        return result;
     }
 
-    private Operation determinantOperation (String expression) {
-        String regex = "(?<=[-+*/])|(?=[-+*/])";
-        String [] operands = expression.trim().split(regex);
-        switch (operands[1].trim()) {
-            case "+": return new OperationAdd();
-            case "-": return new OperationSubtract();
-            case "*": return new OperationAdd();
-            case "/": return new OperationAdd();
-            default: throw new IllegalArgumentException("Unsupported operation");
-        }
+
+    public OperationProvider getOperationProvider() {
+        return operationProvider;
     }
+
+    public void setOperationProvider(OperationProvider operationProvider) {
+        this.operationProvider = operationProvider;
+    }
+
+    public Parser getParser() {
+        return parser;
+    }
+
+    public void setParser(Parser parser) {
+        this.parser = parser;
+    }
+
+
 }

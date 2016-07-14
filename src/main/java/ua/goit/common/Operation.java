@@ -2,5 +2,6 @@ package ua.goit.common;
 
 
 public interface Operation {
-    String doOperation(String expression);
+    double doOperation(double valueOne, double valueTwo);
+    char getOperator ();
 }

@@ -5,8 +5,8 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>ua.goit.calculator</groupId>
-    <artifactId>SpringFramework_1</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <artifactId>calc-lib</artifactId>
+    <version>1.0</version>
 
     <dependencies>
         <dependency>
@@ -14,6 +14,7 @@
             <artifactId>junit</artifactId>
             <version>4.12</version>
         </dependency>
+
     </dependencies>
 
     <build>
@@ -26,9 +27,24 @@
                     <target>1.8</target>
                 </configuration>
             </plugin>
+            <plugin>
+                <artifactId>maven-assembly-plugin</artifactId>
+                <configuration>
+                    <descriptorRefs>
+                        <descriptorRef>jar-with-dependencies</descriptorRef>
+                    </descriptorRefs>
+                </configuration>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>single</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
         </plugins>
     </build>
-
 
 
 </project>
